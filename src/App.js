@@ -4,7 +4,7 @@ import { Container, Typography } from "@mui/material";
 import TicketList from "./components/TicketList";
 import TicketForm from "./components/TicketForm";
 
-const API_URL = "http://localhost:5000/api/tickets"; // change when deployed
+const API_URL = "https://ticket-tracker-backend.vercel.app/api/tickets"; // change when deployed
 
 function App() {
   const [tickets, setTickets] = useState([]);

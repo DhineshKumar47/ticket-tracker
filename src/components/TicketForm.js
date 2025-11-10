@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Box, TextField, Button, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
 
-const API_URL = "http://localhost:5000/api/tickets";
+const API_URL = "https://ticket-tracker-backend.vercel.app/api/tickets";
 
 export default function TicketForm({ refresh }) {
   const [form, setForm] = useState({ title: "", description: "", priority: "low" });

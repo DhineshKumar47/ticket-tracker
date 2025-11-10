@@ -22,7 +22,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import FilterListAltIcon from "@mui/icons-material/FilterListAlt";
 
-const API_URL = "http://localhost:5000/api/tickets";
+const API_URL = "https://ticket-tracker-backend.vercel.app/api/tickets";
 
 export default function TicketList({ tickets, refresh, applyFilter }) {
   const [open, setOpen] = useState(false);
