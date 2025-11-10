@@ -1,24 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { Container, Typography } from "@mui/material";
+import TicketList from "./components/TicketList";
+import TicketForm from "./components/TicketForm";
+
+const API_URL = "http://localhost:5000/api/tickets"; // change when deployed
 
 function App() {
+  const [tickets, setTickets] = useState([]);
+
+  const fetchTickets = async (filters = {}) => {
+    const params = {};
+    if (filters.status) params.status = filters.status;
+    if (filters.priority) params.priority = filters.priority;
+
+    try {
+      const res = await axios.get(API_URL, { params });
+      setTickets(res.data);
+    } catch (err) {
+      console.error("Error fetching tickets:", err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTickets();
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="md" sx={{ mt: 5 }}>
+      <Typography variant="h4" gutterBottom align="center">
+        🎫 Ticket Tracker
+      </Typography>
+
+      <TicketForm refresh={fetchTickets} />
+
+      <TicketList
+        tickets={tickets}
+        refresh={() => fetchTickets()}
+        applyFilter={(filters) => fetchTickets(filters)}
+      />
+    </Container>
   );
 }
 
